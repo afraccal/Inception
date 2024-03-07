@@ -54,3 +54,25 @@ services:
       - DB_NAME: ${DB_NAME}
       - DB_USER: ${DB_USER}
       - DB_PASSWORD: ${DB_PASSWORD}
+
+  nginx:
+    depends_on:
+      - wordpress
+    container_name: nginx_debian
+    build: ./requirements/nginx
+    image: nginx
+    ports:
+      - "443:443"
+    volumes:
+      - wordpress:var/www/wordpress
+    networks:
+      - localhost
+    restart: always
+    environment:
+      NGINX_C: ${NGINX_C}
+      NGINX_ST: ${NGINX_ST}
+      NGINX_L: ${NGINX_L}
+      NGINX_O: ${NGINX_O}
+      NGINX_OU: ${NGINX_OU}
+      NGINX_CN: ${NGINX_CN}
+      NGINX_EMAIL_ADDRESS: ${NGINX_EMAIL_ADDRESS}
