@@ -1,9 +1,9 @@
 #!/bin/bash
 
 service mariadb start
-mysql -e "CREATE DATABASE IF NOT EXIST $DB_HOST;"
+mysql -e "CREATE DATABASE IF NOT EXISTS $DB_HOST;"
 sleep 0.5
-mysql -e "CREATE USER IF NOT EXIST '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASSWORD';"
+mysql -e "CREATE USER IF NOT EXISTS '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASSWORD';"
 sleep 0.5
 mysql -e "GRANT ALL PRIVILEGES ON $DB_HOST.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';"
 sleep 0.5
