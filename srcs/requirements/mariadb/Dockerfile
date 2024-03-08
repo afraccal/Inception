@@ -1,6 +1,8 @@
-FROM debian:buster
+FROM debian:bookworm
 
-RUN apt-get update && apt-get install -y \ mariadb-server
+RUN apt-get update && apt-get upgrade -y
+
+RUN apt install mariadb-server -y
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 COPY ./conf/createdb.sql /
