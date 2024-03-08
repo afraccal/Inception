@@ -23,7 +23,7 @@ reload: @ $(DC) --env-file $(ENV) -f $(YML) up --build
 
 host: @ sudo echo "127.0.0.1 $(USER).42.fr" >> etc/hosts
 
-start: @ $(DC) --env-file $(ENV) -f $(YML) up
+start: docker-compose -f ./srcs/docker-compose.yml --env-file "./srcs/.env" up
 
 stop: @ $(DC) --env-file $(ENV) -f $(YML) down
 
