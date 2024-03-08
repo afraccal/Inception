@@ -31,6 +31,8 @@ services:
       - wordpress:/var/www/wordpress
     networks:
       - localhost
+    expose:
+      - "9000"
     restart: always
     env_file:
       - .env
