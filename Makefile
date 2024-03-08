@@ -10,7 +10,7 @@ MD = mkdir -p
 
 VOLUMES = $(sudo docker volume ls -q)
 
-all: start
+all: $(NAME)
 
 clean: stop
 	sudo docker system prune -a -f
@@ -25,8 +25,13 @@ reload:
 host:
 	@ sudo echo "127.0.0.1 $(USER).42.fr" >> etc/hosts
 
-start:
-	sudo docker-compose -f ./srcs/docker-compose.yml --env-file "./srcs/.env" up
+$(NAME):
+	@if [ ! -d /home/${MY_USER}/data ]; then \
+	mkdir -p /home/${MY_USER}/data/wordpress ; \
+	mkdir -p /home/${MY_USER}/data/mariadb ; \
+	mkdir -p /home/${MY_USER}/data/adminer ; \
+	fi
+	sudo docker-compose -f ./srcs/docker-compose.yml --env-file "./srcs/.env" up --build
 
 stop:
 	$(DC) -f $(YML) --env-file $(ENV) down
