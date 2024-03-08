@@ -1,8 +1,8 @@
 version: "3.8"
 
 networks:
-  localhost:
-    name: inet
+  42-network:
+    driver: bridge
 
 services:
   mariadb:
@@ -15,7 +15,7 @@ services:
     volumes:
       - mariadb:/var/lib/mysql
     networks:
-      - localhost
+      - 42-network
     restart: always
     env_file:
       - .env
@@ -30,7 +30,7 @@ services:
     volumes:
       - wordpress:/var/www/wordpress
     networks:
-      - localhost
+      - 42-network
     expose:
       - "9000"
     restart: always
@@ -49,7 +49,7 @@ services:
     volumes:
       - wordpress:var/www/wordpress
     networks:
-      - localhost
+      - 42-network
     restart: always
     env_file:
       - .env
