@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y \
 	nginx \
 	openssl
 
-COPY ./conf/default etc/nginx/sites-enabled/default
+COPY ./conf/default.conf etc/nginx/sites-enabled/default
 COPY ./conf/configure.sh /
 
 RUN touch /tmp/switch.tmp
