@@ -8,8 +8,6 @@ DC = docker-compose
 RM = rm -rf
 MD = mkdir -p
 
-VOLUMES = $(sudo docker volume ls -q)
-
 all: $(NAME)
 
 clean: stop
@@ -26,17 +24,13 @@ host:
 	@ sudo echo "127.0.0.1 $(USER).42.fr" >> etc/hosts
 
 $(NAME):
-	@if [ ! -d /home/${MY_USER}/data ]; then \
-	mkdir -p /home/${MY_USER}/data/wordpress ; \
-	mkdir -p /home/${MY_USER}/data/mariadb ; \
-	mkdir -p /home/${MY_USER}/data/adminer ; \
 	sudo docker-compose -f ./srcs/docker-compose.yml --env-file "./srcs/.env" up
 
 stop:
 	$(DC) -f $(YML) --env-file $(ENV) down
 
 vol_clean:
-	@ sudo docker volume rm $(VOLUMES)
+	@ sudo docker volume rm mariadb wordpress
 
 dir_clean: 
 	@ $(RM) /home/$(USER)/data
