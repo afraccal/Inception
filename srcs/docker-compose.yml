@@ -31,7 +31,7 @@ services:
     volumes:
       - "mariadb:/var/lib/mysql"
     networks:
-      - backend
+      - 42-network
     restart: always
     env_file:
       - .env
@@ -46,7 +46,7 @@ services:
     volumes:
       - wordpress:/var/www/wordpress
     networks:
-      - localhost
+      - 42-network
     restart: always
     env_file:
       - .env
@@ -62,7 +62,7 @@ services:
     volumes:
       - wordpress:var/www/wordpress
     networks:
-      - localhost
+      - 42network
     restart: always
     env_file:
       - .env
