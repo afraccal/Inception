@@ -47,10 +47,10 @@ services:
     ports:
       - "443:443"
     volumes:
-      - wordpress:var/www/wordpress
+      - wordpress:/var/www/html/wordpress
     networks:
       - 42-network
-    restart: always
+    restart: unless-stopped
     env_file:
       - .env
 
