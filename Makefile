@@ -30,8 +30,7 @@ $(NAME):
 	mkdir -p /home/${MY_USER}/data/wordpress ; \
 	mkdir -p /home/${MY_USER}/data/mariadb ; \
 	mkdir -p /home/${MY_USER}/data/adminer ; \
-	fi
-	sudo docker-compose -f ./srcs/docker-compose.yml --env-file "./srcs/.env" up --build
+	sudo docker-compose -f ./srcs/docker-compose.yml --env-file "./srcs/.env" up
 
 stop:
 	$(DC) -f $(YML) --env-file $(ENV) down
