@@ -1,21 +1,15 @@
 FROM debian:bookworm
 
-RUN apt-get update && apt-get install -y \
-	php7.3 \
-	php-mysqli \
-	php-fpm \
-	mariadb-client
+RUN apt update && apt upgrade
+RUN apt install wget php php-mysqli php-fpm mariadb-client
+RUN mkdir -p var/www/html
+RUN	wget -P /var/www/html https://wordpress.org/latest.tar.gz
+RUN	cd /var/www/html && tar -xzvf latest.tar.gz
 
-COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
+COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
+COPY ./conf/php-fpm.conf /etc/php/8.2/php-fpm.conf
+COPY ./conf/configure.sh /usr/local/bin/
 
-ADD https://it.wordpress.org/wordpress-5.7.2-it_IT.tar.gz /var/www/
-RUN cd /var/www && tar -xzvf wordpress-5.7.2-it_IT.tar.gz
-RUN rm -f /var/www/wordpress-5.7.2-it_IT.tar.gz
-RUN rm -f /var/www/wordpress/wp-config-sample.php
+RUN	wget -P /var/www/html/wordpress https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
-COPY ./conf/php-fpm.conf ./var/www/wordpress/
-COPY ./conf/configure.sh /configure.sh
-
-RUN touch /tmp/switch.tmp
-
-CMD [ "sh", "/configure.sh" ]
+CMD [ "sh", "/usr/local/bin/configure.sh" ]
