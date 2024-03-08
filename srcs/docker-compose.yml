@@ -19,9 +19,12 @@ services:
     restart: always
     env_file:
       - .env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot"]
   wordpress:
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     container_name: wordpress
     build:
       context: requirements/wordpress
