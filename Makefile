@@ -4,9 +4,9 @@ ENV = $(SRC_DIR)/.env
 YML = $(SRC_DIR)/docker-compose.yml
 USER = afraccal
 
-DC = sudo docker-compose
-RM = sudo rm -rf
-MD = sudo mkdir -p
+DC = docker-compose
+RM = rm -rf
+MD = mkdir -p
 
 VOLUMES = $(sudo docker volume ls -q)
 
@@ -23,9 +23,9 @@ reload: @ $(DC) --env-file $(ENV) -f $(YML) up --build
 
 host: @ sudo echo "127.0.0.1 $(USER).42.fr" >> etc/hosts
 
-start: @ $(DC) -f $(YML) --env-file $(ENV) up 
+start: $(DC) -f $(YML) --env-file $(ENV) up 
 
-stop: @ $(DC) -f $(YML) --env-file $(ENV) down
+stop: $(DC) -f $(YML) --env-file $(ENV) down
 
 vol_clean: @ sudo docker volume rm $(VOLUMES)
 
