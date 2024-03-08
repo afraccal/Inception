@@ -13,26 +13,31 @@ VOLUMES = $(sudo docker volume ls -q)
 all: start
 
 clean: stop
-		sudo docker system prune -a -f
+	sudo docker system prune -a -f
 
 fclean: clean vol_clean dir_clean
 
 re: fclean reload
 
-reload: @ $(DC) --env-file $(ENV) -f $(YML) up --build
+reload:	
+	@ $(DC) --env-file $(ENV) -f $(YML) up --build
 
-host: @ sudo echo "127.0.0.1 $(USER).42.fr" >> etc/hosts
+host:
+	@ sudo echo "127.0.0.1 $(USER).42.fr" >> etc/hosts
 
-start: sudo docker-compose -f ./srcs/docker-compose.yml --env-file "./srcs/.env" up
+start:
+	sudo docker-compose -f ./srcs/docker-compose.yml --env-file "./srcs/.env" up
 
-stop: $(DC) -f $(YML) --env-file $(ENV) down
+stop:
+	$(DC) -f $(YML) --env-file $(ENV) down
 
-vol_clean: @ sudo docker volume rm $(VOLUMES)
+vol_clean:
+	@ sudo docker volume rm $(VOLUMES)
 
 dir_clean: 
-		@ $(RM) /home/$(USER)/data
-		@ $(MD) /home/$(USER)/data
-		@ $(MD) /home/$(USER)/data/wordpress
-		@ $(MD) /home/$(USER)/data/mariadb
+	@ $(RM) /home/$(USER)/data
+	@ $(MD) /home/$(USER)/data
+	@ $(MD) /home/$(USER)/data/wordpress
+	@ $(MD) /home/$(USER)/data/mariadb
 
 .PHONY: start stop host all clean fclear re reload vol_clean dir_clean
