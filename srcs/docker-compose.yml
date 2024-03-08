@@ -48,11 +48,8 @@ services:
     networks:
       - localhost
     restart: always
-    environment:
-      - DB_HOST: ${DB_HOST}
-      - DB_NAME: ${DB_NAME}
-      - DB_USER: ${DB_USER}
-      - DB_PASSWORD: ${DB_PASSWORD}
+    env_file:
+      - .env
 
   nginx:
     depends_on:
@@ -67,11 +64,5 @@ services:
     networks:
       - localhost
     restart: always
-    environment:
-      NGINX_C: ${NGINX_C}
-      NGINX_ST: ${NGINX_ST}
-      NGINX_L: ${NGINX_L}
-      NGINX_O: ${NGINX_O}
-      NGINX_OU: ${NGINX_OU}
-      NGINX_CN: ${NGINX_CN}
-      NGINX_EMAIL_ADDRESS: ${NGINX_EMAIL_ADDRESS}
+    env_file:
+      - .env
