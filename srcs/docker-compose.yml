@@ -22,7 +22,7 @@ services:
   wordpress:
     depends_on:
       - mariadb
-    container_name: wordpress_debian
+    container_name: wordpress
     build:
       context: requirements/wordpress
       dockerfile: Dockerfile
