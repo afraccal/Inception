@@ -23,9 +23,9 @@ reload: @ $(DC) --env-file $(ENV) -f $(YML) up --build
 
 host: @ sudo echo "127.0.0.1 $(USER).42.fr" >> etc/hosts
 
-start: @ $(DC) --env-file $(ENV) -f $(YML) up
+start: @ $(DC) -f $(YML) --env-file $(ENV) up 
 
-stop: @ $(DC) --env-file $(ENV) -f $(YML) down
+stop: @ $(DC) -f $(YML) --env-file $(ENV) down
 
 vol_clean: @ sudo docker volume rm $(VOLUMES)
 
