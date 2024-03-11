@@ -27,7 +27,6 @@ $(NAME):
 	@if [ ! -d /home/${USER}/data ]; then \
 	mkdir -p /home/${USER}/data/wordpress ; \
 	mkdir -p /home/${USER}/data/mariadb ; \
-	mkdir -p /home/${USER}/data/adminer ; \
 	fi
 	sudo docker-compose -f ./srcs/docker-compose.yml --env-file "./srcs/.env" up
 
@@ -39,8 +38,8 @@ vol_clean:
 
 dir_clean: 
 	@ $(RM) /home/$(USER)/data
-	@ $(MD) /home/$(USER)/data
-	@ $(MD) /home/$(USER)/data/wordpress
-	@ $(MD) /home/$(USER)/data/mariadb
+#	@ $(MD) /home/$(USER)/data
+#	@ $(MD) /home/$(USER)/data/wordpress
+#	@ $(MD) /home/$(USER)/data/mariadb
 
 .PHONY: start stop host all clean fclear re reload vol_clean dir_clean
