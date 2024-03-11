@@ -29,7 +29,7 @@ services:
     build:
       context: requirements/wordpress
       dockerfile: Dockerfile
-    image: wordpress
+    image: wordpress_42
     volumes:
       - wordpress:/var/www/wordpress
     networks:
@@ -46,7 +46,7 @@ services:
     build: 
       context: requirements/nginx
       dockerfile: Dockerfile
-    image: nginx
+    image: nginx_42
     ports:
       - "443:443"
     volumes:
