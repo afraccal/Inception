@@ -10,6 +10,6 @@ COPY conf/configure.sh /usr/local/bin/
 COPY conf/php-fpm.conf /etc/php/8.2/php-fpm.conf
 COPY conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
-RUN	wget -P /var/www/html https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN	wget -P /var/www/html/wordpress https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 ENTRYPOINT [ "/bin/sh", "/usr/local/bin/configure.sh" ]
