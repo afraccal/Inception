@@ -31,7 +31,7 @@ services:
       dockerfile: Dockerfile
     image: wordpress_42
     volumes:
-      - wordpress:/var/www/wordpress
+      - wordpress:/var/www/html
     networks:
       - 42-network
     expose:
